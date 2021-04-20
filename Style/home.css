@@ -1,0 +1,27 @@
+.jumbotron{
+    background-image: url("../Style/Images/Banner.jpg"); 
+    background-size: cover;
+    height: 100vh;}
+ 
+ .bannertext{
+     color:rgb(238, 48, 0);
+     font-family: 'Nanum Brush Script', cursive;
+     font-size: 700%;
+ }
+ 
+ .bannertextContainer{
+     background: rgba(0, 0, 0, 0.6);
+     display: none;
+ }
+ 
+ .recipeContainer{
+     width:auto;
+     height: 600px;
+     overflow: auto;
+     opacity: 0;
+ }
+
+ #AddRecipe{
+    cursor: pointer;
+ }
+ 
