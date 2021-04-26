@@ -1,3 +1,23 @@
+<?php
+
+include_once "db/dbconnect.php";
+
+$query1 = "SELECT * ";
+  $query1 .= "FROM USER ";
+
+  $stmt = $conn->prepare($query1);
+
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if($result->num_rows === 0)
+    echo "No Rows";
+
+  $customers = $result->fetch_all(MYSQLI_ASSOC);
+         
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -79,6 +99,7 @@
                 </div>
             </div>
          <!-------->
+         
         
         </div>
       <div>

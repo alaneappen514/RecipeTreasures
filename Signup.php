@@ -1,3 +1,52 @@
+<!-- WHAT IS CURRENTLY MISSING: 
+NO CHECKING IF THE USERNAME/PASSWORD ALREADY EXISTS IN DB
+NO SUCCESS STATEMENT SAYING THAT THE ACCOUNT WAS CREATED. 
+WOULD I REROUTE THEM THEN TO THE HOMEPAGE OR LOGIN? -->
+
+<?php
+ include_once "db/dbconnect.php";
+
+ //Protect from 
+ function validateStr($str){
+  $str = trim($str);
+  $str = stripcslashes($str);
+  $str = htmlspecialchars($str);
+
+  return $str;
+}
+
+ if(isset($_POST['submit'])){
+  if(empty($_POST['email'])){
+    $errors['email'] = "Missing email";
+    //var_dump($errors);
+  }
+s
+  if(empty($_POST['password'])){
+    $errors['password'] = "Missing Password";
+    var_dump($errors);
+  }
+  // var_dump($_POST['email']);
+
+  $noNull = (isset($_POST['email']) && isset($_POST['password']));
+  var_dump($noNull);
+  if($noNull)
+  {
+    $inputtedEmail = $_POST['email'];
+    $inputtedPassword = $_POST['password'];
+
+    $signupQuery = "INSERT INTO USER (Email , Password)";
+    $signupQuery .= "VALUES ('$inputtedEmail' , '$inputtedPassword')";
+
+    // mysqli_query($conn, $signupQuery);
+    $stmt = $conn->prepare($signupQuery);
+
+    $stmt->execute();
+  }
+
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,19 +76,26 @@
         <h1 class="text-center text-white">Sign Up</h1>
        
         <!-- Sign Up Form -->
-        <form>
+        <form action="Signup.php" method="POST">
             <div class="mb-3">
                  <h4 class="text-white">Email</h4>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <h4 class="text-white">Password</h4>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             </div>
             <p>Have an Account? <a href="Login.php">Login</a></p>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="submit" name="submit" class="btn btn-primary" value="Submit"></input>
         </form>
         <!--  -->
+        <?php
+
+          echo isset($errors['email']) ?  $errors['email'] : '';
+          echo isset($errors['password']) ? $errors['password'] : '';
+
+
+        ?>
 
     </div>
 
