@@ -20,7 +20,7 @@ WOULD I REROUTE THEM THEN TO THE HOMEPAGE OR LOGIN? -->
     $errors['email'] = "Missing email";
     //var_dump($errors);
   }
-s
+
   if(empty($_POST['password'])){
     $errors['password'] = "Missing Password";
     var_dump($errors);
