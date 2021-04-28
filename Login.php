@@ -1,3 +1,57 @@
+<?php
+ include_once "db/dbconnect.php";
+
+ //Protect from 
+ function validateStr($str){
+  $str = trim($str);
+  $str = stripcslashes($str);
+  $str = htmlspecialchars($str);
+
+  return $str;
+}
+
+ if(isset($_POST['submit'])){
+  if(empty($_POST['email'])){
+    $errors['email'] = "Missing email";
+    //var_dump($errors);
+  }
+
+  if(empty($_POST['password'])){
+    $errors['password'] = "Missing Password";
+    var_dump($errors);
+  }
+  // var_dump($_POST['email']);
+
+  $noNull = (isset($_POST['email']) && isset($_POST['password']));
+  var_dump($noNull);
+  if($noNull)
+  {
+    $inputtedEmail = $_POST['email'];
+    $inputtedPassword = $_POST['password'];
+
+    $loginQuery = "SELECT EMAIL, PASSWORD ";
+    $loginQuery .= "FROM USER ";
+    $loginQuery .= "WHERE Email = '$inputtedEmail' AND Password = '$inputtedPassword'";
+    // $loginQuery .= "WHERE Email = '$inputtedEmail'";
+
+    $stmt = $conn->prepare($loginQuery);
+    // $stmt->bind_param("ss", $inputtedEmail, $inputtedPassword);
+
+    $stmt->execute();
+
+    $accountInfo = $stmt->get_result();
+
+    if($accountInfo->num_rows === 0) exit("No Rows");
+
+    $accountInfoDisplay = $accountInfo->fetch_all(MYSQLI_ASSOC);
+    var_dump($accountInfoDisplay);
+  }
+
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,19 +81,26 @@
         <h1 class="text-center text-white">Login</h1>
        
         <!-- Login Form -->
-        <form>
+        <form action="Login.php" method="POST">
             <div class="mb-3">
                  <h4 class="text-white">Email</h4>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <h4 class="text-white">Password</h4>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             </div>
             <p>Dont't have an Account? <a href="Signup.php">Sign Up</a></p>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
         </form>
         <!--  -->
+        <?php
+
+          echo isset($errors['email']) ?  $errors['email'] : '';
+          echo isset($errors['password']) ? $errors['password'] : '';
+
+
+        ?>
 
     </div>
 
