@@ -27,20 +27,29 @@ WOULD I REROUTE THEM THEN TO THE HOMEPAGE OR LOGIN? -->
   }
   // var_dump($_POST['email']);
 
-  $noNull = (isset($_POST['email']) && isset($_POST['password']));
+  $noNull = (empty($errors['password'])) && empty($errors['user']);
   var_dump($noNull);
   if($noNull)
   {
-    $inputtedEmail = $_POST['email'];
-    $inputtedPassword = $_POST['password'];
+    // $inputtedEmail = $_POST['email'];
+    // $inputtedPassword = $_POST['password'];
 
+    $inputtedEmail = validateStr($_POST['email']);
+    $inputtedPassword = validateStr($_POST['password']);
+
+    $hashedPassword = password_hash($inputtedPassword, PASSWORD_DEFAULT);
     $signupQuery = "INSERT INTO USER (Email , Password)";
-    $signupQuery .= "VALUES ('$inputtedEmail' , '$inputtedPassword')";
+    $signupQuery .= "VALUES (? , ?)";
 
     // mysqli_query($conn, $signupQuery);
     $stmt = $conn->prepare($signupQuery);
+    $stmt->bind_param("ss", $inputtedEmail, $hashedPassword);
+
 
     $stmt->execute();
+
+    header("Location: Login.php");
+
   }
 
 }
@@ -79,11 +88,11 @@ WOULD I REROUTE THEM THEN TO THE HOMEPAGE OR LOGIN? -->
         <form action="Signup.php" method="POST">
             <div class="mb-3">
                  <h4 class="text-white">Email</h4>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" name="email" value = '' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <h4 class="text-white">Password</h4>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" name="password" value = '' class="form-control" id="exampleInputPassword1">
             </div>
             <p>Have an Account? <a href="Login.php">Login</a></p>
             <input type="submit" name="submit" class="btn btn-primary" value="Submit"></input>
