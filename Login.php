@@ -12,11 +12,13 @@
 
  if(isset($_POST['submit'])){
   if(empty($_POST['email'])){
+    // $_POST['email'] = '';
     $errors['email'] = "Missing email";
     //var_dump($errors);
   }
 
   if(empty($_POST['password'])){
+    // $_POST['password'] = '';
     $errors['password'] = "Missing Password";
     var_dump($errors);
   }
@@ -26,25 +28,47 @@
   var_dump($noNull);
   if($noNull)
   {
-    $inputtedEmail = $_POST['email'];
-    $inputtedPassword = $_POST['password'];
+    $inputtedEmail = validateStr($_POST['email']);
+    $inputtedPassword = validateStr($_POST['password']);
 
-    $loginQuery = "SELECT EMAIL, PASSWORD ";
+    $loginQuery = "SELECT USER_ID, EMAIL, PASSWORD ";
     $loginQuery .= "FROM USER ";
-    $loginQuery .= "WHERE Email = '$inputtedEmail' AND Password = '$inputtedPassword'";
-    // $loginQuery .= "WHERE Email = '$inputtedEmail'";
+    // $loginQuery .= "WHERE Email = ? AND Password = ?";
+    $loginQuery .= "WHERE Email = ?";
 
     $stmt = $conn->prepare($loginQuery);
     // $stmt->bind_param("ss", $inputtedEmail, $inputtedPassword);
-
+    $stmt->bind_param("s", $inputtedEmail);
     $stmt->execute();
 
     $accountInfo = $stmt->get_result();
 
-    if($accountInfo->num_rows === 0) exit("No Rows");
+    //Check if theres something that was returned
+    if($accountInfo->num_rows === 0){
+      //Verify password hash
+      echo "No account by those credentials";
+    }
+    else{
+      $accountInfoDisplay = $accountInfo->fetch_all(MYSQLI_ASSOC);
+      var_dump($accountInfoDisplay);
+      if(password_verify($inputtedPassword, $accountInfoDisplay[0]['PASSWORD']))
+      {
+        session_start();
+        $_SESSION['email'] = $accountInfoDisplay['email'];
+        $_SESSION['userID'] = $accountInfoDisplay['USER_ID'];
 
-    $accountInfoDisplay = $accountInfo->fetch_all(MYSQLI_ASSOC);
-    var_dump($accountInfoDisplay);
+        echo "Credentials accepted";
+        header("Location: Home.php");
+      }
+      else{
+        $errors['password'] = "Credentials do not match!";
+      }
+     
+
+      
+    }
+
+    
   }
 
 }
