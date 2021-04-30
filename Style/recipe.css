@@ -1,0 +1,77 @@
+body{
+    background-color: whitesmoke;
+}
+
+.jumbotron{
+    background-image: url("../Style/Images/RecipePic.jpg"); 
+    background-size: cover;
+    height: 50vh;}
+
+.test{
+    position: absolute;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 70rem;
+    padding: 2.5rem;
+    background-color: white;
+    border-radius: 0.625rem;
+    display: none;
+}
+
+input[type=checkbox]:checked + label.strikethrough{
+    text-decoration: line-through;
+  }
+input[type=checkbox]
+{
+  -ms-transform: scale(2);
+  -moz-transform: scale(2); 
+  -webkit-transform: scale(2); 
+  -o-transform: scale(2); 
+  padding: 10px;
+}
+
+.comment_container{
+  position: relative;
+  max-width: auto;
+  height: 500px;
+  overflow: auto;
+}
+
+.user_comment {
+   position: relative;
+  max-width: auto;
+  height: auto;
+}
+
+.SubmitBtn{
+  display: none !important;
+}
+
+.addReadMore.showlesscontent .SecSec,
+.addReadMore.showlesscontent .readLess {
+    display: none;
+}
+
+.addReadMore.showmorecontent .readMore {
+    display: none;
+}
+
+.addReadMore .readMore,
+.addReadMore .readLess {
+    font-weight: bold;
+    margin-left: 2px;
+    color: lightskyblue;
+    cursor: pointer;
+}
+
+.addReadMoreWrapTxt.showmorecontent .SecSec,
+.addReadMoreWrapTxt.showmorecontent .readLess {
+    display: block;
+}
+
+#EditRecipe{
+  cursor: pointer;
+}
