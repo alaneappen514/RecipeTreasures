@@ -53,7 +53,7 @@
     <div class="container">
       <div class="d-flex justify-content-between align-items-center mt-5">
         <h1 class="text-center">Recipes</h1>
-        <i id="AddRecipe" class="fas fa-plus-circle fa-3x"></i>
+        <i id="AddRecipe" class="fas fa-plus-circle fa-3x" title="Create Recipe"></i>
       </div>
 
       <hr class="dropdown-divider mt-4">
@@ -72,7 +72,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <div class="d-flex justify-content-end">
+                            <!-------------------- View/Delete  ------------------------------>
+                            <a href="Recipe.php" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x mx-3"></i></a>
+                            <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x "></i></a>
+                            <!---------------------------------------------------------------------->
+                            </div>
                         </div>
                         </div>
                     </div>
@@ -113,13 +118,13 @@
                 <i class="fas fa-utensils mt-2 text-danger"></i>
                 <h4 class="text-danger">RT</h4>
                 </div>
-                <button type="button" class="btn btn-primary">Submit Recipe</button>
+                <button type="button" class="btn btn-dark">Submit Recipe</button>
             </div>
             </div>
         </div>
     </div>
     <!-------->
- 
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/script.js"><script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
