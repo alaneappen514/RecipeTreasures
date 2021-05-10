@@ -1,19 +1,23 @@
 <?php
+    include "includes/new-recipe-handle.inc.php";
+?>
 
-include_once "db/dbconnect.php";
+<?php
 
-$query1 = "SELECT * ";
-  $query1 .= "FROM USER ";
+// include_once "db/dbconnect.php";
 
-  $stmt = $conn->prepare($query1);
+// $query1 = "SELECT * ";
+//   $query1 .= "FROM USER ";
 
-  $stmt->execute();
-  $result = $stmt->get_result();
+//   $stmt = $conn->prepare($query1);
 
-  if($result->num_rows === 0)
-    echo "No Rows";
+//   $stmt->execute();
+//   $result = $stmt->get_result();
 
-  $customers = $result->fetch_all(MYSQLI_ASSOC);
+//   if($result->num_rows === 0)
+//     echo "No Rows";
+
+//   $customers = $result->fetch_all(MYSQLI_ASSOC);
          
 
 ?>
@@ -111,36 +115,45 @@ $query1 = "SELECT * ";
     </div>
 
     <!-- Creating New Recipe View -->
+    <?php
+        if (!empty($errors)) {
+            echo "<ul>";
+            foreach ($errors as $e) {
+                echo "<li>$e</li>";
+            }
+            echo "</ul>";
+        }
+    ?>
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">New Recipe</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Title</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Recipe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">Ingredients</label>
-                    <textarea class="form-control" id="message-text"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">Description</label>
-                    <textarea class="form-control" id="message-text"></textarea>
-                </div>
+                <form action="Home.php" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" name="recipe_title" id="recipient-name" value="<?php echo $recipe_title ?? ''; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Ingredients</label>
+                            <textarea class="form-control" name="ingredients" id="message-text" value="<?php echo $ingredients ?? ''; ?>"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Description</label>
+                            <textarea class="form-control" name="recipe_desc" id="message-text-2 value="<?php echo $recipe_desc ?? ''; ?>""></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <div class="d-flex">
+                            <i class="fas fa-utensils mt-2 text-danger"></i>
+                            <h4 class="text-danger">RT</h4>
+                        </div>
+                        <input type="submit" class="btn btn-dark" name="new_recipe" value="Submit Recipe">
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <div class="d-flex">
-                <i class="fas fa-utensils mt-2 text-danger"></i>
-                <h4 class="text-danger">RT</h4>
-                </div>
-                <button type="button" class="btn btn-dark">Submit Recipe</button>
-            </div>
             </div>
         </div>
     </div>
