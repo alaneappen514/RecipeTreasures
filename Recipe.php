@@ -1,6 +1,9 @@
 <?php
-$ingredients = array("chicken breasts","buttermilk","flour", "corn starch", "spices","brioche buns"); //Ingredients must be split into this format//
-
+$title = $_GET['recipe_title'];
+$ingredients = $_GET['recipe_ing'];
+$description = $_GET['recipe_desc'];
+$image = $_GET['recipe_img'];
+$arr = explode(',',$ingredients);
 ?>
 
 
@@ -59,7 +62,8 @@ $ingredients = array("chicken breasts","buttermilk","flour", "corn starch", "spi
         <div class="RecipeHeader">
             <div class="d-flex justify-content-between">
               <div  class="d-flex">
-              <h1>Chicken Sandwich</h1>
+
+              <?php echo "<h1> $title </h1>";?>
               <!-------------------- Like ------------------------------>
               <i class="far fa-thumbs-up fa-2x mt-2 mx-3"></i>
               <!--------------------------------------------------->
@@ -78,7 +82,7 @@ $ingredients = array("chicken breasts","buttermilk","flour", "corn starch", "spi
 
         <div class="d-flex justify-content-center align-items-center my-4">
         <!-------------------- Image ------------------------------>
-        <img src="Style/Images/bgImage.jpg" alt=RecipePicture class="img-fluid rounded"></img>
+        <?php echo"<img src='$image' alt=RecipePicture class='img-fluid rounded'></img>"?>
         <!--------------------------------------------------------------->
         </div>
 
@@ -92,7 +96,7 @@ $ingredients = array("chicken breasts","buttermilk","flour", "corn starch", "spi
                       <!-------------------- Ingredients ------------------------------>
                       <div class="form-group ">
                           <?php 
-                          foreach($ingredients as $value){
+                          foreach($arr as $value){
                             echo"<div class='col-md-5 mt-2'>";
                             echo "<div class='checkbox d-flex'>";
                             echo   "<input class='mx-2' type='checkbox' name='packersOff' id='packers' value='1'/>";
@@ -113,13 +117,7 @@ $ingredients = array("chicken breasts","buttermilk","flour", "corn starch", "spi
                   <hr class="dropdown-divider mt-3">
                       <!-------------------- Description ------------------------------>
                       <div class="contentDescription mt-5 p-3">
-                          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin 
-                            literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College 
-                            in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through 
-                            the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                            written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. 
-                            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-                              exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                          <?php echo "<p> $description </p>"?>
                       </div> 
                        <!----------------------------------------------------------->   
                     </div>

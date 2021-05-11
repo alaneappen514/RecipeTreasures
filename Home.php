@@ -1,5 +1,6 @@
 <?php
     include "includes/new-recipe-handle.inc.php";
+    include "includes/retrieve_recipe.php";
 ?>
 
 <?php
@@ -83,30 +84,36 @@
       <hr class="dropdown-divider mt-4">
 
       <div class="recipeContainer p-5">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
 
         <!-- This is where we gonna map all the recipes to view them -->
+        <?php foreach($recipes as $recipe): ?>
             <div class="col">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                        <img src="..." alt="...">
+                        <div class="col-xl-4">
+                        <img class="card_image" src=<?=$recipe['PHOTO']?> alt="...">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-xl-8">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex flex-column align-items-xl-end ">
+                            <h5 class="card-title"><?=$recipe['Title']?></h5>
+                            <br><br><br><br><br><br>
+                            <div class="d-flex mt-2">
                             <!-------------------- View/Delete  ------------------------------>
-                            <a href="Recipe.php" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x mx-3"></i></a>
-                            <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x "></i></a>
+                            <?php
+                            echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
+                            ?>
+                            <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x"></i></a>
                             <!---------------------------------------------------------------------->
+                             </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
             </div>
+        <?php endforeach; ?>
          <!-------->
          
         
@@ -131,19 +138,26 @@
                     <h5 class="modal-title">New Recipe</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="Home.php" method="POST">
+                <form action="Home.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Title</label>
                             <input type="text" class="form-control" name="recipe_title" id="recipient-name" value="<?php echo $recipe_title ?? ''; ?>">
                         </div>
                         <div class="form-group">
+                            <div class="d-flex">
                             <label for="message-text" class="col-form-label">Ingredients</label>
+                            <label for="message-text" class="col-form-label">(Put a comma after each Ingredient)</label>
+                            </div>
                             <textarea class="form-control" name="ingredients" id="message-text" value="<?php echo $ingredients ?? ''; ?>"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Description</label>
+                            <label for="message-text" class="col-form-label">Description </label>
                             <textarea class="form-control" name="recipe_desc" id="message-text-2 value="<?php echo $recipe_desc ?? ''; ?>""></textarea>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="photo" class="col-form-label">Upload Image</label><br>
+                            <input type="file" name="photo" id="photo" value=""/>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
