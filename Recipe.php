@@ -1,12 +1,14 @@
 <?php
 include "includes/new-comment.php";
+include "includes/get-comments.php";
+// session_start();
+// var_dump($_POST);
 
-$title = $_GET['recipe_title'];
-$ingredients = $_GET['recipe_ing'];
-$description = $_GET['recipe_desc'];
-$image = $_GET['recipe_img'];
+// }
 $arr = explode(',',$ingredients);
-session_start();
+// $recIDInt = (int)$recID, "\n";
+// var_dump($recIDInt);
+var_dump((int)$recID);
 ?>
 
 
@@ -126,61 +128,51 @@ session_start();
                     </div>
 
                   <div class="comments my-4">
-                        <form>
+
+                  <?php 
+                        var_dump($_SESSION['userID']);
+                        var_dump($_SESSION['email']);
+                    ?>
+                        <form action="Recipe.php" method="POST">
+                        
                         <h2 class="text-center ">Comments</h2>
                         <hr class="dropdown-divider mt-3">
                         <div class="mt-5 ">
 
                             <div class="input-group input-group-sm mb-3">
-                            <input placeholder="Add a comment..." type="text" class="form-control inputTextbox" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input placeholder="Add a comment..." type="text" name="commentText" class="form-control inputTextbox" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
 
-                            <?php var_dump($_SESSION); ?>
                             <div class=" d-flex justify-content-end SubmitBtn" id="commentSubmit">
                             <button id="cancelBtn" type="button" class="btn btn-secondary mx-2">Cancel</button>
-                            <button id="commentBtn" type="submit" name="submit" class="btn btn-dark">Comment</button>
+                            <button id="commentBtn" type="submit" name="new_comment" class="btn btn-dark">Comment</button>
                             </form>
                             </div>
 
                             <div class="comment_container mt-3">
                               <!------------ Comments --------------------------------------->
-                                <div class="user_comment my-4">
-                                    <h5>Alan Eappen</h5>
-                                    <p class="addReadMore showlesscontent position-relative"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into e
-                                      lectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
-                                <div class="user_comment my-4">
-                                    <h5>Alan Eappen</h5>
-                                    <p class="addReadMore showlesscontent"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into e
-                                      lectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
-                                <div class="user_comment my-4">
-                                    <h5>Alan Eappen</h5>
-                                    <p class="addReadMore showlesscontent"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has </p>
-                                </div>
+                              <?php
 
-                                <div class="user_comment my-4">
-                                    <h5>Alan Eappen</h5>
-                                    <p class="addReadMore showlesscontent"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has </p>
-                                </div>
-                                <div class="user_comment my-4">
-                                    <h5>Alan Eappen</h5>
-                                    <p class="addReadMore showlesscontent"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into e
-                                      lectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
-                                <div class="user_comment my-4">
-                                    <h5>Alan Eappen</h5>
-                                    <p class="addReadMore showlesscontent"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into e
-                                      lectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+
+                              if(isset($commentDisplay)){
+                              foreach($commentDisplay as $subArray)
+                              {
+                                  echo "<div class='user_comment my-4'>";
+                                  echo "<h5>". truncateEmail($subArray['EMAIL']) ."</h5>";
+                                  echo "<p class='addReadMore showlesscontent position-relative'>". $subArray['Comment'];
+                                  echo "</p>";
+                                  echo "</div>";
+                                
+                              }
+                              }
+                              else{
+                                echo "<div class='user_comment my-4'>";
+                                echo "<p class='addReadMore showlesscontent position-relative'> No Comments for this Recipe Yet!";
+                                echo "</p>";
+                                echo "</div>";
+
+                              }
+                              ?>
                                 <!------------------------------------------------------------>
                             <div>
                         </div> 

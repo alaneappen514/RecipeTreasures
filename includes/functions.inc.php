@@ -6,4 +6,10 @@
         
         return $input;
     }
+
+    function truncateEmail($input){
+        $processInput = explode("@",$input);
+        $nameContent = $processInput[0];
+        return $nameContent;
+    }
 ?>
