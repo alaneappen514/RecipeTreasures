@@ -78,7 +78,6 @@ var_dump((int)$recID);
             </div>  
 
             <div class="d-flex pt-2">
-              <h6>By Alan Eappen</h6>
               <h6 class="mx-2">Feb. 24 2021</h6>
             </div>
         </div>
