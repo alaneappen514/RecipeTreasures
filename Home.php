@@ -1,6 +1,12 @@
 <?php
+    include "db/dbconnect.php";
     include "includes/new-recipe-handle.inc.php";
     include "includes/retrieve_recipe.php";
+    session_start();
+    var_dump($_SESSION);
+    // if(!isset($SESSION["id"])){
+    //     header("Location: Login.php");
+    // }
 ?>
 
 <?php
@@ -74,8 +80,10 @@
             <h1 class="bannertext">Recipe Treasures</h1>
         </div>
     </div>
+    
 
     <div class="container">
+    <?php echo "I am " .$_SESSION['email']. ' '.$_SESSION['userID'] ;?>
       <div class="d-flex justify-content-between align-items-center mt-5">
         <h1 class="text-center">Recipes</h1>
         <i id="AddRecipe" class="fas fa-plus-circle fa-3x" title="Create Recipe"></i>
@@ -87,7 +95,9 @@
         <div class="row row-cols-1 row-cols-md-2 g-4">
 
         <!-- This is where we gonna map all the recipes to view them -->
-        <?php foreach($recipes as $recipe): ?>
+        <?php 
+        var_dump($recipes);
+        foreach($recipes as $recipe): ?>
             <div class="col">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
@@ -102,7 +112,8 @@
                             <div class="d-flex mt-2">
                             <!-------------------- View/Delete  ------------------------------>
                             <?php
-                            echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
+                            echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'&recipe_id='.$recipe['Recipe_ID'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
+                            //'&recipe_id='.$recipe['Recipe_ID']'
                             ?>
                             <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x"></i></a>
                             <!---------------------------------------------------------------------->
