@@ -1,9 +1,12 @@
 <?php
+include "includes/new-comment.php";
+
 $title = $_GET['recipe_title'];
 $ingredients = $_GET['recipe_ing'];
 $description = $_GET['recipe_desc'];
 $image = $_GET['recipe_img'];
 $arr = explode(',',$ingredients);
+session_start();
 ?>
 
 
@@ -123,6 +126,7 @@ $arr = explode(',',$ingredients);
                     </div>
 
                   <div class="comments my-4">
+                        <form>
                         <h2 class="text-center ">Comments</h2>
                         <hr class="dropdown-divider mt-3">
                         <div class="mt-5 ">
@@ -131,9 +135,11 @@ $arr = explode(',',$ingredients);
                             <input placeholder="Add a comment..." type="text" class="form-control inputTextbox" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
 
+                            <?php var_dump($_SESSION); ?>
                             <div class=" d-flex justify-content-end SubmitBtn" id="commentSubmit">
                             <button id="cancelBtn" type="button" class="btn btn-secondary mx-2">Cancel</button>
-                            <button id="commentBtn" type="button" class="btn btn-dark">Comment</button>
+                            <button id="commentBtn" type="submit" name="submit" class="btn btn-dark">Comment</button>
+                            </form>
                             </div>
 
                             <div class="comment_container mt-3">

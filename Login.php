@@ -51,13 +51,15 @@
     else{
       $accountInfoDisplay = $accountInfo->fetch_all(MYSQLI_ASSOC);
       var_dump($accountInfoDisplay);
+      // echo "Email".$accountInfoDisplay['EMAIL'];
+      // echo "ID".$accountInfoDisplay['USER_ID'];
       if(password_verify($inputtedPassword, $accountInfoDisplay[0]['PASSWORD']))
       {
         session_start();
-        $_SESSION['email'] = $accountInfoDisplay['email'];
-        $_SESSION['userID'] = $accountInfoDisplay['USER_ID'];
-
+        $_SESSION['email'] = $accountInfoDisplay[0]['EMAIL'];
+        $_SESSION['userID'] = $accountInfoDisplay[0]['USER_ID'];
         echo "Credentials accepted";
+        var_dump($_SESSION);
         header("Location: Home.php");
       }
       else{

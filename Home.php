@@ -1,6 +1,12 @@
 <?php
+    include "db/dbconnect.php";
     include "includes/new-recipe-handle.inc.php";
     include "includes/retrieve_recipe.php";
+    session_start();
+    var_dump($_SESSION);
+    // if(!isset($SESSION["id"])){
+    //     header("Location: Login.php");
+    // }
 ?>
 
 <?php
@@ -74,8 +80,10 @@
             <h1 class="bannertext">Recipe Treasures</h1>
         </div>
     </div>
+    
 
     <div class="container">
+    <?php echo "I am " .$_SESSION['email']. ' '.$_SESSION['userID'] ;?>
       <div class="d-flex justify-content-between align-items-center mt-5">
         <h1 class="text-center">Recipes</h1>
         <i id="AddRecipe" class="fas fa-plus-circle fa-3x" title="Create Recipe"></i>
