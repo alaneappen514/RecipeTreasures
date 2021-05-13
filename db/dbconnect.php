@@ -12,7 +12,7 @@ define("DATABASE", "recipe_treasures");
 $conn = new mysqli(DOMAIN, USERNAME, PWD, DATABASE);
 echo "successful connection";
 
-$conn->set_charset("utg8mb4");
+$conn->set_charset("utf8mb4");
 } catch(Exception $e){
     error_log($e->getMessage());
     var_dump($e);

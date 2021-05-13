@@ -26,6 +26,7 @@
                 // session_start();
                 // $user_id = $_SESSION['userID'];
                 $user_id = 3;
+                $likes = 0;
         
                 $checkQ = "SELECT Title, Ingredients, Description, User_ID ";
                 $checkQ .= "FROM RECIPES WHERE Title = ? and Ingredients = ? and Description = ?  and PHOTO = ? and User_ID = ?";
@@ -40,11 +41,11 @@
                 if ($stmt->get_result()->num_rows > 0) {
                     $errors["duplicate"] = "Recipe has already been made!";
                 } else {
-                    $insertQ = "INSERT INTO RECIPES (Title, Ingredients, Description, PHOTO, User_ID) ";
-                    $insertQ .= "VALUES (?, ?, ?, ?, ?)";
+                    $insertQ = "INSERT INTO RECIPES (Title, Ingredients, Description, PHOTO, User_ID, Likes) ";
+                    $insertQ .= "VALUES (?, ?, ?, ?, ?, ?)";
         
                     $stmt2 = $conn->prepare($insertQ);
-                    $stmt2->bind_param("ssssi", $recipe_title, $ingredients, $recipe_desc, $target_file, $user_id);
+                    $stmt2->bind_param("ssssii", $recipe_title, $ingredients, $recipe_desc, $target_file, $user_id, $likes);
                     if (!$stmt2->execute()) {
                         $errors["insert"] = "We have a problem creating your recipe";
                     } else {

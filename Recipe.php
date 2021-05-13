@@ -8,7 +8,6 @@ include "includes/get-comments.php";
 $arr = explode(',',$ingredients);
 // $recIDInt = (int)$recID, "\n";
 // var_dump($recIDInt);
-var_dump((int)$recID);
 ?>
 
 
@@ -68,18 +67,15 @@ var_dump((int)$recID);
             <div class="d-flex justify-content-between">
               <div  class="d-flex">
 
-              <?php echo "<h1> $title </h1>";?>
-              <!-------------------- Like ------------------------------>
-              <i class="far fa-thumbs-up fa-2x mt-2 mx-3"></i>
-              <!--------------------------------------------------->
-              <h3 class="bg-dark text-white rounded px-2 py-1">157</h3> <!---Like Value -->
+              <?php 
+              echo "<h1> $title </h1>";
+              ?>
               </div>
              <i id="EditRecipe" class="far fa-edit fa-2x" title="Edit Recipe"></i></a>
             </div>  
 
             <div class="d-flex pt-2">
-              <h6>By Alan Eappen</h6>
-              <h6 class="mx-2">Feb. 24 2021</h6>
+              <?php echo "<h5> By ". truncateEmail($_SESSION['email']) ."</h5>"; ?>
             </div>
         </div>
 
@@ -140,7 +136,7 @@ var_dump((int)$recID);
                         <div class="mt-5 ">
 
                             <div class="input-group input-group-sm mb-3">
-                            <input placeholder="Add a comment..." type="text" name="commentText" class="form-control inputTextbox" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input placeholder="Add a comment..." type="text" name="commentText" class="form-control inputTextbox " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
 
                             <div class=" d-flex justify-content-end SubmitBtn" id="commentSubmit">
@@ -149,7 +145,7 @@ var_dump((int)$recID);
                             </form>
                             </div>
 
-                            <div class="comment_container mt-3">
+                            <div class="comment_container border shadow p-2">
                               <!------------ Comments --------------------------------------->
                               <?php
 
@@ -159,7 +155,7 @@ var_dump((int)$recID);
                               {
                                   echo "<div class='user_comment my-4'>";
                                   echo "<h5>". truncateEmail($subArray['EMAIL']) ."</h5>";
-                                  echo "<p class='addReadMore showlesscontent position-relative'>". $subArray['Comment'];
+                                  echo "<p class='addReadMore showlesscontent position-relative ml-3'>". $subArray['Comment'];
                                   echo "</p>";
                                   echo "</div>";
                                 
