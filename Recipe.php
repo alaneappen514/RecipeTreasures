@@ -1,3 +1,4 @@
+
 <?php
   include "includes/new-comment.php";
   include "includes/get-comments.php";
@@ -62,17 +63,12 @@
         <div class="d-flex justify-content-between">
           <div class="d-flex">
             <?php echo "<h1> $title </h1>";?>
-            <!-------------------- Like ------------------------------>
-            <i class="far fa-thumbs-up fa-2x mt-2 mx-3"></i>
-            <!--------------------------------------------------->
-            <h3 class="bg-dark text-white rounded px-2 py-1">157</h3> <!---Like Value -->
           </div>
           <i id="EditRecipe" class="far fa-edit fa-2x" title="Edit Recipe"></i></a>
         </div>  
 
         <div class="d-flex pt-2">
-          <h6>By Alan Eappen</h6>
-          <h6 class="mx-2">Feb. 24 2021</h6>
+        <?php echo "<h6> By " .truncateEmail($_SESSION['email'])."</h6>";?>
         </div>
       </div>
 
@@ -117,10 +113,6 @@
               <!----------------------------------------------------------->   
             </div>
             <div class="comments my-4">
-              <?php 
-                var_dump($_SESSION['userID']);
-                var_dump($_SESSION['email']);
-              ?>
               <form action="Recipe.php" method="POST">
                 <h2 class="text-center ">Comments</h2>
                 <hr class="dropdown-divider mt-3">
