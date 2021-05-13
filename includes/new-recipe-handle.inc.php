@@ -4,7 +4,7 @@
 
     if (isset($_POST['new_recipe'])) {
         var_dump($_FILES["photo"]);
-        if( isset($_FILES["photo"]["type"]) && $_FILES["photo"]["error"] == UPLOAD_ERR_OK){
+        if (isset($_FILES["photo"]["type"]) && $_FILES["photo"]["error"] == UPLOAD_ERR_OK) {
             $target_dir = "photos/";
             $target_file = $target_dir.basename($_FILES["photo"]["name"]);
             // echo "<br><br>".$target_file."<br>";
@@ -12,13 +12,13 @@
             $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
             // echo "Extension: $file_type<br>";
             $accepted = array("jpg","JPG", "png", "gif");
-            if(!in_array($file_type, $accepted)){
+            if (!in_array($file_type, $accepted)) {
                 echo "Images only";
             }
-            else if(!move_uploaded_file($_FILES["photo"]["tmp_name"],$target_file))
-            {
+            else if (!move_uploaded_file($_FILES["photo"]["tmp_name"],$target_file)) {
                 echo "There was a problem uploading that photo".$_FILES["photo"]["error"];
-            }else{
+            }
+            else {
                 $errors = [];
                 $recipe_title = sanitizeStr($_POST['recipe_title']);
                 $ingredients = sanitizeStr($_POST['ingredients']);
@@ -54,9 +54,9 @@
                 }
             }
         }
-        else{
-            //checking errors
-            switch($_FILES["photo"]["error"]){
+        else {
+            // Checking errors
+            switch($_FILES["photo"]["error"]) {
                 case UPLOAD_ERR_NO_FILE:
                     $message = "No image was uploaded. Make sure to upload an image";
                     break;
@@ -65,6 +65,5 @@
             }
             echo "There was a problem uploading your Image. ".$message;
         }
-
     }
 ?>

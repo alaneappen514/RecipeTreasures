@@ -2,31 +2,24 @@
     include "db/dbconnect.php";
     include "includes/new-recipe-handle.inc.php";
     include "includes/retrieve_recipe.php";
+
     session_start();
     var_dump($_SESSION);
-    // if(!isset($SESSION["id"])){
+    // if (!isset($SESSION["id"])) {
     //     header("Location: Login.php");
     // }
 ?>
 
 <?php
-
 // include_once "db/dbconnect.php";
-
 // $query1 = "SELECT * ";
-//   $query1 .= "FROM USER ";
-
-//   $stmt = $conn->prepare($query1);
-
-//   $stmt->execute();
-//   $result = $stmt->get_result();
-
-//   if($result->num_rows === 0)
-//     echo "No Rows";
-
-//   $customers = $result->fetch_all(MYSQLI_ASSOC);
-         
-
+// $query1 .= "FROM USER ";
+// $stmt = $conn->prepare($query1);
+// $stmt->execute();
+// $result = $stmt->get_result();
+//
+// if ($result->num_rows === 0) echo "No Rows";
+// $customers = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!doctype html>
@@ -39,37 +32,36 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link   rel="stylesheet" href="Style/home.css">
+    <link rel="stylesheet" href="Style/home.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
     <title>Recipe Treasures</title>
   </head>
   <body>
-
   <!-- NavBar-->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <div class="d-flex">
-            <i class="fas fa-utensils fa-2x text-danger"></i>
-            <a class="text-decoration-none"href="Home.php"><h2 class=" mx-2 text-danger">RT</h2></a>
-        </div>
-        <div class="float-right ">
-        <button class="navbar-toggler float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Account
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Signout</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                </ul>
-                </li>
-            </ul>
+        <div class="container">
+            <div class="d-flex">
+                <i class="fas fa-utensils fa-2x text-danger"></i>
+                <a class="text-decoration-none"href="Home.php"><h2 class=" mx-2 text-danger">RT</h2></a>
             </div>
+            <div class="float-right ">
+                <button class="navbar-toggler float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Account
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Signout</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -81,8 +73,8 @@
         </div>
     </div>
     
-
     <div class="container">
+<<<<<<< HEAD
     <?php echo "<h3 class='text-center p-3 text-white bg-dark'> Welcome " .truncateEmail($_SESSION['email'])."</h3>" ;?>
       <div class="d-flex justify-content-between align-items-center mt-5">
         <h1 class="text-center">Recipes</h1>
@@ -132,18 +124,51 @@
                                 <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x"></i></a>
                                 <!---------------------------------------------------------------------->
                              </div>
+=======
+        <?php echo "I am " .$_SESSION['email']. ' '.$_SESSION['userID'] ;?>
+        <div class="d-flex justify-content-between align-items-center mt-5">
+            <h1 class="text-center">Recipes</h1>
+            <i id="AddRecipe" class="fas fa-plus-circle fa-3x" title="Create Recipe"></i>
+        </div>
+        <hr class="dropdown-divider mt-4">
+        <div class="recipeContainer p-5">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- This is where we gonna map all the recipes to view them -->
+                <?php 
+                    var_dump($recipes);
+                    foreach($recipes as $recipe): 
+                ?>
+                <div class="col">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-xl-4">
+                                <img class="card_image" src=<?=$recipe['PHOTO']?> alt="...">
                             </div>
-                        </div>
+                            <div class="col-xl-8">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-xl-end">
+                                        <h5 class="card-title"><?=$recipe['Title']?></h5>
+                                        <br><br><br><br><br><br>
+                                        <div class="d-flex mt-2">
+                                            <!-------------------- View/Delete  ------------------------------>
+                                            <?php
+                                                echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'&recipe_id='.$recipe['Recipe_ID'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
+                                                //'&recipe_id='.$recipe['Recipe_ID']'
+                                            ?>
+                                            <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x"></i></a>
+                                            <!---------------------------------------------------------------------->
+                                        </div>
+                                    </div>
+                                </div>
+>>>>>>> c4d983298a797c04d8a0180d6d4b506b1f56c2d6
+                            </div>
                         </div>
                     </div>
                 </div>
+                <?php endforeach; ?>
+                <!-------->
             </div>
-        <?php endforeach; ?>
-         <!-------->
-         
-        
-        </div>
-      <div>
+        <div>
     </div>
 
     <!-- Creating New Recipe View -->
