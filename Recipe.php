@@ -2,6 +2,7 @@
 <?php
   include "includes/new-comment.php";
   include "includes/get-comments.php";
+  include "includes/handle-edit-recipe.php";
   // session_start();
   // var_dump($_POST);
 
@@ -9,7 +10,15 @@
   $arr = explode(',',$ingredients);
   // $recIDInt = (int)$recID, "\n";
   // var_dump($recIDInt);
-  var_dump((int)$recID);
+  // var_dump((int)$recID);
+  
+  $userId = $_SESSION['userID']; 
+
+  $authorID = (int)$_GET['author_id'];
+  // var_dump($authorID);
+  // var_dump($userId);
+  // var_dump($_GET);
+
 ?>
 
 <!doctype html>
@@ -64,7 +73,16 @@
           <div class="d-flex">
             <?php echo "<h1> $title </h1>";?>
           </div>
+
+          <!-- UNCOMMENT THIS ONCE YOU FIGURE OUT HOW TO PUT IN THE USER ID FOR THE RECIPES-->
+          <!-- <?php //Only show this edit button if they are the user that created it. 
+          // if($authorID == $userId)
+          //     echo "<i id='EditRecipe' class='far fa-edit fa-2x' title='Edit Recipe'></i></a>"       
+          ?> -->
+
+          <!-- Take this line out if the above problem is fixed ^^^ -->
           <i id="EditRecipe" class="far fa-edit fa-2x" title="Edit Recipe"></i></a>
+
         </div>  
 
         <div class="d-flex pt-2">
@@ -164,27 +182,32 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form action="Recipe.php" method="POST">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Title</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <input type="text" name="newTitle" value="<?php echo $title ?>" class="form-control" id="recipient-name">
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Ingredients</label>
-                <textarea class="form-control" id="message-text"></textarea>
+                <textarea class="form-control" name="newIng" id="message-text">
+                <?php echo $ingredients ?>
+                </textarea>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Description</label>
-                <textarea class="form-control" id="message-text"></textarea>
+                <textarea class="form-control" name="newDesc" id="message-text">
+                <?php echo $description ?>
+                </textarea>
               </div>
-            </form>
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <div class="d-flex">
               <i class="fas fa-utensils mt-2 text-danger"></i>
               <h4 class="text-danger">RT</h4>
             </div>
-            <button type="button" class="btn btn-dark">Submit Recipe</button>
+            <button type="submit" name="new_edit_submit" class="btn btn-dark">Submit Recipe</button>
+            </form>
+
           </div>
         </div>
       </div>
