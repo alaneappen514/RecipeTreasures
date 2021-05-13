@@ -1,15 +1,5 @@
-<?php
-<<<<<<< HEAD
-include "includes/new-comment.php";
-include "includes/get-comments.php";
-// session_start();
-// var_dump($_POST);
 
-// }
-$arr = explode(',',$ingredients);
-// $recIDInt = (int)$recID, "\n";
-// var_dump($recIDInt);
-=======
+<?php
   include "includes/new-comment.php";
   include "includes/get-comments.php";
   // session_start();
@@ -20,7 +10,6 @@ $arr = explode(',',$ingredients);
   // $recIDInt = (int)$recID, "\n";
   // var_dump($recIDInt);
   var_dump((int)$recID);
->>>>>>> c4d983298a797c04d8a0180d6d4b506b1f56c2d6
 ?>
 
 <!doctype html>
@@ -70,39 +59,16 @@ $arr = explode(',',$ingredients);
     <!-------->
     <div class="jumbotron jumbotron-fluid"></div>
     <div class="container test shadow">
-<<<<<<< HEAD
-
-        <div class="RecipeHeader">
-            <div class="d-flex justify-content-between">
-              <div  class="d-flex">
-
-              <?php 
-              echo "<h1> $title </h1>";
-              ?>
-              </div>
-             <i id="EditRecipe" class="far fa-edit fa-2x" title="Edit Recipe"></i></a>
-            </div>  
-
-            <div class="d-flex pt-2">
-              <?php echo "<h5> By ". truncateEmail($_SESSION['email']) ."</h5>"; ?>
-            </div>
-=======
       <div class="RecipeHeader">
         <div class="d-flex justify-content-between">
           <div class="d-flex">
             <?php echo "<h1> $title </h1>";?>
-            <!-------------------- Like ------------------------------>
-            <i class="far fa-thumbs-up fa-2x mt-2 mx-3"></i>
-            <!--------------------------------------------------->
-            <h3 class="bg-dark text-white rounded px-2 py-1">157</h3> <!---Like Value -->
           </div>
           <i id="EditRecipe" class="far fa-edit fa-2x" title="Edit Recipe"></i></a>
         </div>  
 
         <div class="d-flex pt-2">
-          <h6>By Alan Eappen</h6>
-          <h6 class="mx-2">Feb. 24 2021</h6>
->>>>>>> c4d983298a797c04d8a0180d6d4b506b1f56c2d6
+        <?php echo "<h6> By " .truncateEmail($_SESSION['email'])."</h6>";?>
         </div>
       </div>
 
@@ -121,55 +87,6 @@ $arr = explode(',',$ingredients);
                 <!-------------------- Ingredients ------------------------------>
                 <div class="form-group">
                   <?php 
-<<<<<<< HEAD
-                        var_dump($_SESSION['userID']);
-                        var_dump($_SESSION['email']);
-                    ?>
-                        <form action="Recipe.php" method="POST">
-                        
-                        <h2 class="text-center ">Comments</h2>
-                        <hr class="dropdown-divider mt-3">
-                        <div class="mt-5 ">
-
-                            <div class="input-group input-group-sm mb-3">
-                            <input placeholder="Add a comment..." type="text" name="commentText" class="form-control inputTextbox " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-
-                            <div class=" d-flex justify-content-end SubmitBtn" id="commentSubmit">
-                            <button id="cancelBtn" type="button" class="btn btn-secondary mx-2">Cancel</button>
-                            <button id="commentBtn" type="submit" name="new_comment" class="btn btn-dark">Comment</button>
-                            </form>
-                            </div>
-
-                            <div class="comment_container border shadow p-2">
-                              <!------------ Comments --------------------------------------->
-                              <?php
-
-
-                              if(isset($commentDisplay)){
-                              foreach($commentDisplay as $subArray)
-                              {
-                                  echo "<div class='user_comment my-4'>";
-                                  echo "<h5>". truncateEmail($subArray['EMAIL']) ."</h5>";
-                                  echo "<p class='addReadMore showlesscontent position-relative ml-3'>". $subArray['Comment'];
-                                  echo "</p>";
-                                  echo "</div>";
-                                
-                              }
-                              }
-                              else{
-                                echo "<div class='user_comment my-4'>";
-                                echo "<p class='addReadMore showlesscontent position-relative'> No Comments for this Recipe Yet!";
-                                echo "</p>";
-                                echo "</div>";
-
-                              }
-                              ?>
-                                <!------------------------------------------------------------>
-                            <div>
-                        </div> 
-                  </div>
-=======
                     foreach($arr as $value){
                       echo"<div class='col-md-5 mt-2'>";
                       echo "<div class='checkbox d-flex'>";
@@ -181,7 +98,6 @@ $arr = explode(',',$ingredients);
                   ?> 
                 </div>
                 <!-------------------------------------------------->
->>>>>>> c4d983298a797c04d8a0180d6d4b506b1f56c2d6
               </div>
             </div>
           </div>
@@ -197,10 +113,6 @@ $arr = explode(',',$ingredients);
               <!----------------------------------------------------------->   
             </div>
             <div class="comments my-4">
-              <?php 
-                var_dump($_SESSION['userID']);
-                var_dump($_SESSION['email']);
-              ?>
               <form action="Recipe.php" method="POST">
                 <h2 class="text-center ">Comments</h2>
                 <hr class="dropdown-divider mt-3">

@@ -74,58 +74,7 @@
     </div>
     
     <div class="container">
-<<<<<<< HEAD
-    <?php echo "<h3 class='text-center p-3 text-white bg-dark'> Welcome " .truncateEmail($_SESSION['email'])."</h3>" ;?>
-      <div class="d-flex justify-content-between align-items-center mt-5">
-        <h1 class="text-center">Recipes</h1>
-        <i id="AddRecipe" class="fas fa-plus-circle fa-3x" title="Create Recipe"></i>
-      </div>
-
-      <hr class="dropdown-divider mt-4">
-
-      <div class="recipeContainer p-5">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-
-        <!-- This is where we gonna map all the recipes to view them -->
-        <?php 
-        foreach($recipes as $recipe): ?>
-            <div class="col">
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0 shadow border-0">
-                        <div class="col-xl-4">
-                        <img class="card_image" src=<?=$recipe['PHOTO']?> alt="...">
-                        </div>
-                        <div class="col-xl-8">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-xl-end ">
-                            <h5 class="card-title"><?=$recipe['Title']?></h5>
-                            <br><br><br><br><br><br>
-                            <div class="d-flex mt-2">
-                            <div class="test1">
-                                    <?php 
-                                        $sql = " SELECT * FROM likes WHERE User_ID=".$_SESSION['userID']." AND Recipe_ID=".$recipe['Recipe_ID']."";
-                                        $stmt = $conn->prepare($sql);
-                                        $stmt -> execute();
-                                        $result = $stmt->get_result();
-                                        if($result->num_rows == 1) { ?>
-                                            <i class="fas fa-thumbs-up fa-2x unlike" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
-                                            <i class="far fa-thumbs-up fa-2x like d-none" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
-                                        <?php } else { ?>
-                                            <i class="far fa-thumbs-up fa-2x like" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
-                                            <i class="fas fa-thumbs-up fa-2x unlike d-none" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
-                                        <?php } ?>
-                                        <span class="likes_count"><?php echo $recipe['Likes']; ?></span>
-                                </div>
-                                <!-------------------- View/Delete  ------------------------------>
-                                <?php
-                                echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'&recipe_id='.$recipe['Recipe_ID'].'&likes='.$recipe['Likes'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
-                                //'&recipe_id='.$recipe['Recipe_ID']'
-                                ?>
-                                <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x"></i></a>
-                                <!---------------------------------------------------------------------->
-                             </div>
-=======
-        <?php echo "I am " .$_SESSION['email']. ' '.$_SESSION['userID'] ;?>
+        <?php echo "<h3 class='text-center p-3 text-white bg-dark'> Welcome " .truncateEmail($_SESSION['email'])."</h3>" ;?>
         <div class="d-flex justify-content-between align-items-center mt-5">
             <h1 class="text-center">Recipes</h1>
             <i id="AddRecipe" class="fas fa-plus-circle fa-3x" title="Create Recipe"></i>
@@ -135,12 +84,11 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <!-- This is where we gonna map all the recipes to view them -->
                 <?php 
-                    var_dump($recipes);
                     foreach($recipes as $recipe): 
                 ?>
                 <div class="col">
                     <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
+                        <div class="row g-0 shadow border">
                             <div class="col-xl-4">
                                 <img class="card_image" src=<?=$recipe['PHOTO']?> alt="...">
                             </div>
@@ -150,6 +98,21 @@
                                         <h5 class="card-title"><?=$recipe['Title']?></h5>
                                         <br><br><br><br><br><br>
                                         <div class="d-flex mt-2">
+                                            <div class="test1">
+                                                <?php 
+                                                $sql = " SELECT * FROM likes WHERE User_ID=".$_SESSION['userID']." AND Recipe_ID=".$recipe['Recipe_ID']."";
+                                                $stmt = $conn->prepare($sql);
+                                                $stmt -> execute();
+                                                $result = $stmt->get_result();
+                                                if($result->num_rows == 1) { ?>
+                                                    <i class="fas fa-thumbs-up fa-2x unlike" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
+                                                    <i class="far fa-thumbs-up fa-2x like d-none" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
+                                                <?php } else { ?>
+                                                    <i class="far fa-thumbs-up fa-2x like" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
+                                                    <i class="fas fa-thumbs-up fa-2x unlike d-none" data-id="[<?php echo $recipe['Recipe_ID']; ?>,<?php echo $_SESSION['userID']; ?>]"></i>
+                                                <?php } ?>
+                                                <span class="likes_count"><?php echo $recipe['Likes']; ?></span>
+                                            </div>
                                             <!-------------------- View/Delete  ------------------------------>
                                             <?php
                                                 echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'&recipe_id='.$recipe['Recipe_ID'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
@@ -160,7 +123,6 @@
                                         </div>
                                     </div>
                                 </div>
->>>>>>> c4d983298a797c04d8a0180d6d4b506b1f56c2d6
                             </div>
                         </div>
                     </div>
