@@ -1,6 +1,7 @@
 <?php
     include_once "db/dbconnect.php";
     include_once "functions.inc.php";
+    
 
     if (isset($_POST['new_recipe'])) {
         var_dump($_FILES["photo"]);

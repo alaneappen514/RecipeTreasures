@@ -4,7 +4,7 @@
     $recID = $_SESSION['recipe_id'];
     $recIDINT = (int)$recID;
 
-    echo "In get-Comments, check rec_ID: ". $recIDINT;
+    // echo "In get-Comments, check rec_ID: ". $recIDINT;
     // Retrieve comments from the comment table, query has to be based on the recipe_id you are on.
     // $inputtedEmail = validateStr($_POST['email']);
     // $inputtedPassword = validateStr($_POST['password']);
