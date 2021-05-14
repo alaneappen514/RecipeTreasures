@@ -24,9 +24,9 @@
                 $recipe_title = sanitizeStr($_POST['recipe_title']);
                 $ingredients = sanitizeStr($_POST['ingredients']);
                 $recipe_desc = sanitizeStr($_POST['recipe_desc']);
-                // session_start();
-                // $user_id = $_SESSION['userID'];
-                $user_id = 3;
+                session_start();
+                $user_id = $_SESSION['userID'];
+
                 $likes = 0;
         
                 $checkQ = "SELECT Title, Ingredients, Description, User_ID ";

@@ -1,4 +1,3 @@
-
 <?php
   include "includes/new-comment.php";
   include "includes/get-comments.php";
@@ -14,11 +13,25 @@
   
   $userId = $_SESSION['userID']; 
 
-  $authorID = (int)$_GET['author_id'];
+  //$authorID = (int)$_GET['author_id'];
   // var_dump($authorID);
-  // var_dump($userId);
+  //var_dump($_GET['author_id']);
   // var_dump($_GET);
-
+  if($_GET == null) {
+    $authorID = $_SESSION['author_id'];
+  }
+  else{
+    $authorID = (int)$_GET['author_id'];
+    $_SESSION['author_id'] = $_GET['author_id'];
+  }
+  var_dump($authorID);
+  $sql = "SELECT user.Email FROM user INNER JOIN recipes ON user.User_ID = $authorID";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $email = $result->fetch_all(MYSQLI_ASSOC);
+  $authorName=$email[0]['Email'];
+  var_dump($authorName);
 ?>
 
 <!doctype html>
@@ -75,18 +88,15 @@
           </div>
 
           <!-- UNCOMMENT THIS ONCE YOU FIGURE OUT HOW TO PUT IN THE USER ID FOR THE RECIPES-->
-          <!-- <?php //Only show this edit button if they are the user that created it. 
-          // if($authorID == $userId)
-          //     echo "<i id='EditRecipe' class='far fa-edit fa-2x' title='Edit Recipe'></i></a>"       
-          ?> -->
-
-          <!-- Take this line out if the above problem is fixed ^^^ -->
-          <i id="EditRecipe" class="far fa-edit fa-2x" title="Edit Recipe"></i></a>
+           <?php //Only show this edit button if they are the user that created it. 
+            if($authorID == $userId)
+              echo "<i id='EditRecipe' class='far fa-edit fa-2x' title='Edit Recipe'></i></a>"       
+          ?>
 
         </div>  
 
         <div class="d-flex pt-2">
-        <?php echo "<h6> By " .truncateEmail($_SESSION['email'])."</h6>";?>
+        <?php echo "<h6> By " .truncateEmail($authorName)."</h6>";?>
         </div>
       </div>
 
