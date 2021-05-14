@@ -2,6 +2,7 @@
     include "db/dbconnect.php";
     include "includes/new-recipe-handle.inc.php";
     include "includes/retrieve_recipe.php";
+    include "includes/delete-recipe-handle.inc.php";
 
     session_start();
     // var_dump($_SESSION);
@@ -119,7 +120,10 @@
                                                 echo '<a href="Recipe.php?recipe_title='.$recipe['Title']. '&recipe_ing='.$recipe['Ingredients'].'&recipe_desc='.$recipe['Description'].'&recipe_img='.$recipe['PHOTO'].'&recipe_id='.$recipe['Recipe_ID'].'&author_id='.$recipe['User_ID'].'" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="View"> <i class="far fa-eye fa-2x  mx-3"></i></a>';
                                                 //'&recipe_id='.$recipe['Recipe_ID']'
                                             ?>
-                                            <a href="#" class="text-dark" data-bs-toggle="tooltip" data-placement="bottom"  title="Delete"> <i class="far fa-trash-alt fa-2x"></i></a>
+                                            <?php
+                                                if ($recipe['User_ID'] === $_SESSION['userID']) { ?>
+                                                    <i class="far fa-trash-alt fa-2x delete-recipe" data-id="[<?php echo $recipe['Recipe_ID']; ?>]"></i>    
+                                                <?php } ?>
                                             <!---------------------------------------------------------------------->
                                         </div>
                                     </div>
