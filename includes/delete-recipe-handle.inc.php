@@ -18,6 +18,19 @@
 
     if (isset($_POST['delete_recipe'])) {
         $recipe_ID = $_POST['Recipe_ID'];
+
+        $deleteQL = "DELETE FROM likes  WHERE Recipe_ID = ?";
+
+        $stmtL = $conn->prepare($deleteQL);
+        $stmtL->bind_param("i", $recipe_ID);
+        $stmtL->execute();
+
+        $deleteQC = "DELETE FROM comments WHERE Recipe_ID = ?";
+
+        $stmtC = $conn->prepare($deleteQC);
+        $stmtC->bind_param("i", $recipe_ID);
+        $stmtC->execute();
+
         $deleteQ = "DELETE FROM RECIPES WHERE Recipe_ID = ?";
 
         $stmt = $conn->prepare($deleteQ);
