@@ -56,4 +56,22 @@ $(document).ready(function () {
         });
     });
 
+    $('.delete-recipe').on('click', function() {
+        var ids = $(this).data('id');
+        var Recipe_ID = ids[0];
+        $.ajax({
+            url: 'includes/delete-recipe-handle.inc.php',
+            type: 'POST',
+            data: { 
+                'delete_recipe': 1,
+                'Recipe_ID': Recipe_ID,
+            },
+            success: function (result) {
+                location.href = 'Home.php';
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+    })
 })

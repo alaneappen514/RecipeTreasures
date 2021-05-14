@@ -8,25 +8,11 @@
         define("DATABASE", "recipe_treasures");
 
         $conn = new mysqli(DOMAIN, USERNAME, PWD, DATABASE);
-        echo "successful connection";
 
-<<<<<<< HEAD
-
-$conn = new mysqli(DOMAIN, USERNAME, PWD, DATABASE);
-echo "successful connection";
-
-$conn->set_charset("utg8mb4");
-} catch(Exception $e){
-    error_log($e->getMessage());
-    var_dump($e);
-    exit("Error connecting to db");
-}
-=======
         $conn->set_charset("utg8mb4");
     } catch(Exception $e) {
         error_log($e->getMessage());
         var_dump($e);
         exit("Error connecting to db");
     }
->>>>>>> c4d983298a797c04d8a0180d6d4b506b1f56c2d6
 ?>
